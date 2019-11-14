@@ -1,0 +1,65 @@
+Para la 4ta iteración de "Tus Libros" se requiere implementar finalmente la cara externa de la interfaz REST y construir la prueba de concepto de un prototipo de aplicación cliente, que consuma los servicios provistos por dicha interfaz, siguiendo una arquitectura cliente-servidor.
+
+Con respecto a la interfaz Rest, podremos hacer uso del objeto WebServer del paquete WebCliente.pck.st (incluído en /Packages/Features de CuisU), para redireccionar los pedidos del exterior a los mensajes que sabe responder la solución de la iteración 3. Para más detalle, pueden recorrer el ejemplo incluído (StringServer). Recuerden que deben instalar el paquete en su imagen de CuisU, tan sólo haciendo drag and drop del paquete a la ventana de CuisU. 
+
+Para el prototipo de aplicación cliente que deben construir, y su UI gráfica, se pide realizar una solución web local basada en Html + Javascript + React. Se incluye una demo de ejemplo (próximamente estará subida, Substrings Finder) que consume los servicios del StringServer.
+
+Con respecto a la funcionalidad, el cliente web que se quiere construir debe:
+
+
+1) Permitir la creación de un carrito. Para ello se debe poder ingresar un usuario y contraseña válidos en "textboxes/inputs" claramente identificados para ello en una ventana, y presionar un botón "Create cart".
+
+2) Si el usuario y contraseña es válido se debe mostrar el catálogo de libros de la editorial en una lista, incluyendo su título y número de isbn. En caso contrario se mostrará un error de login incorrecto.
+
+3) Al lado de cada libro de la lista anterior, se deberá tener un botón de agregar (+) y quitar (-) libros al carrito de a uno a la vez, y un indicador de cuantos libros de ese título se tiene actualmente agregados en el carrito. Recuerden que agregar elementos al carrito implica modificar al modelo que corre en el servidor. 
+
+4) Si se clickea en algún libro en particular, se pasa a una vista de detalle, donde además de verse el título y isbn, se agrega el autor y opcionalmente una imagen de la cubierta del mismo. Aquí también debería de poderse agregar y quitar copias del mismo al carrito, y visualizarse la cantidad actual.
+
+5) En cualquier momento se debería de poder visualizar los elementos incluidos actualmente en el carrito junto a su cantidad, y agregar o quitar copias desde allí (similar a la vista de catálogo, pero mostrando en la lista sólo los elementos del carrito). 
+
+6) Desde la vista de los elementos del carrito, y cuando el usuario está conforme con su selección de productos, se debe de poder presionar un botón de "Check out". El mismo debería efectuar el check out y realizar la venta correspondiente en el servidor. Para simplificar, se asume que los datos de la tarjeta de crédito ya son conocidos por el servidor al momento del login. Si la compra se efectiviza, se debe visualizar el ticket de detalle de la venta correspondiente. En caso contrario, se deberá mostrar un mensaje de error, junto al motivo de dicho error.
+
+7) En cualquier momento se debe de poder visualizar el historial de compra del usuario. Es decir, la lista de libros comprados históricamente por el usuario, junto a su cantidad por título, y el total gastado.
+
+8) Se requiere una barra de navegación siempre visible en la parte superior de la aplicación, mostrando el nombre de la misma, un botón de logout (que se muestra sólo cuando se está loqueado), un botón de ir a la vista del catalogo (cuando logueado y corresponde), un botón de carrito (logueado y corresponde) y uno de historial de compras (logueado y corresponde).
+
+
+Aclaraciones:
+
+a) Los pasos de arriba son un conjunto mínimo de funcionalidades requeridas. Si quieren hacer algo más completo, pueden hacerlo por puntos extra. Por el momento los objetos simulados de la iteración anterior (como el merchant processor) podrán seguir siendo tratados de la misma manera.
+
+b) Deberán agregar todos los servicios/cambios a su modelo que crean necesarios para poder cumplir con las funcionalidades de arriba. Por ej. se deberá obtener el catálogo completo de libros de la editorial para visualizarlo en la lista de la GUI.
+
+c) No olviden que todo lo visto en la materia hasta ahora sigue valiendo ;) Lo que puedan traten de desarrollarlo utilizando TDD, eviten código repetido, los ifs innecesarios, piensen en las reglas de diseño que vimos, etc...
+
+d) Pueden ignorar los formatos de URL y devolución de strings estipulados en la consigna original.
+
+Importante: 
+
+Con respecto a la demo incluida de referencia smalltalk, StringServer:
+
+- La misma tiene código repetido... Si la van a usar de modelo, ténganlo en cuenta ;)
+
+- Para abrir el server que sabe escuchar el por ej:
+
+http://localhost:8080/sayHi
+
+O el:
+
+http://localhost:8080/substrings?sentence=i%20am%20one%20with%20the%20force%20and%20the%20force%20is%20with%20me
+
+pueden abrir un workspace y evaluar:
+
+server := StringServerController listeningOn: 8080
+
+Para darlo de baja: 
+
+server stopListening.
+server destroy.
+
+(Si tienen algún problema de perder la referencia del StringServerController para darlo de baja, recuerden que siempre pueden utilizar: StringServerController allInstances).
+
+
+
+
+
